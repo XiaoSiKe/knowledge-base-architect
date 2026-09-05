@@ -1,0 +1,30 @@
+name: Validate skill
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Compile scripts
+        run: python3 -m compileall -q scripts tests
+
+      - name: Run package tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Check Markdown quality
+        run: python3 scripts/quality_check.py examples/github-beginner-result.md README.md SKILL.md

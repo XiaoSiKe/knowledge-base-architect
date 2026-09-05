@@ -1,0 +1,7 @@
+interface:
+  display_name: "知识库架构大师"
+  short_description: "把杂乱资料整理成简洁、专业、可复用的个人知识库"
+  brand_color: "#2563EB"
+  default_prompt: "使用 $knowledge-base-architect 按我的个人风格整理这批资料。"
+policy:
+  allow_implicit_invocation: true

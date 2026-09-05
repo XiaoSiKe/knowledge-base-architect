@@ -27,4 +27,4 @@ jobs:
         run: python3 -m unittest discover -s tests -v
 
       - name: Check Markdown quality
-        run: python3 scripts/quality_check.py examples/github-beginner-result.md README.md SKILL.md
+        run: python3 scripts/quality_check.py --strict examples/*.md README.md SKILL.md references/*.md

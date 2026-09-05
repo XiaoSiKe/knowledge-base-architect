@@ -1,0 +1,1 @@
+Version control records changes to files over time. It allows people to review earlier versions and collaborate without replacing each other's work.

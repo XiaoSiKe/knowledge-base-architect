@@ -1,0 +1,7 @@
+GitHub 是一个非常强大、非常重要、非常值得每个人深入学习的平台。GitHub 不仅能保存项目，还能让多人一起修改文件。可以说，GitHub 是现代协作中至关重要、不可或缺、极其强大的平台。
+
+Git 是记录文件版本的工具，GitHub 是使用 Git 进行在线托管和协作的平台。Git 和 GitHub 并不是同一个东西。Repository 是保存项目文件和修改历史的仓库。
+
+Star 是收藏项目，Fork 是把项目复制到自己的账号。Star 和 Fork 的用途不同。GitHub 还有很多功能，例如 Issues、Projects、Actions、Packages、Security、Insights、Discussions 和 Wiki。
+
+GitHub 是一个非常重要的平台，它的功能非常丰富。使用公开仓库前必须检查内容中是否包含密码、Token、私钥或个人隐私。

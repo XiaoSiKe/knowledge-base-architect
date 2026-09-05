@@ -1,0 +1,9 @@
+用户确认的最终稿：
+
+API（Application Programming Interface）可以理解为软件之间约定好的沟通入口。
+
+先记住：API 负责“怎么沟通”，不是某个具体软件。
+
+第一次调用前检查三件事：地址、权限、参数。密钥不要写进公开文件。
+
+这篇文章只讨论天气查询接口。我的测试账号是 person@example.test，内部项目代号是 Blue Lantern。

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "profile_id": "example-personal-knowledge-base",
+  "language": "zh-CN",
+  "revision": 1,
+  "updated_at": "2026-01-01",
+  "scopes": {
+    "default": {
+      "density": "standard",
+      "opening": "direct-answer",
+      "paragraph_style": "short",
+      "heading_style": "numbered-when-long",
+      "terminology": "explain-on-first-use",
+      "tone": [
+        "clear",
+        "restrained",
+        "practical"
+      ],
+      "prefer": [
+        "cognition-before-action",
+        "copyable-steps",
+        "memorable-summary"
+      ],
+      "avoid": [
+        "promotional-opening",
+        "empty-conclusion",
+        "excessive-emphasis"
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "sample-001",
+      "kind": "accepted-revision",
+      "reference": "user-confirmed writing sample",
+      "observations": [
+        "moves the core definition before operational details",
+        "removes repeated background explanations"
+      ],
+      "confirmed": true
+    }
+  ]
+}

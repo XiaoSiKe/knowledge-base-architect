@@ -5,7 +5,7 @@
 <p><strong>把 AI 长文和零散资料，整理成真正属于你的知识库</strong></p>
 
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-2563EB)](https://agentskills.io/specification)
-[![Version](https://img.shields.io/badge/version-0.2.0-16A34A)](https://github.com/XiaoSiKe/knowledge-base-architect)
+[![Version](https://img.shields.io/badge/version-0.4.0-16A34A)](https://github.com/XiaoSiKe/knowledge-base-architect)
 [![Validate](https://github.com/XiaoSiKe/knowledge-base-architect/actions/workflows/validate.yml/badge.svg)](https://github.com/XiaoSiKe/knowledge-base-architect/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-MIT-F59E0B)](LICENSE)
 [![Language](https://img.shields.io/badge/language-简体中文-E11D48)](README.md)
@@ -24,9 +24,12 @@ AI 往往给出一篇“很完整但不想保存”的长文：重复、松散�
 
 - 小白可以看懂的解释
 - 由浅入深的知识结构
+- 根据概念、决策、教程、SOP、综述、复盘或 FAQ 选择结构
 - 可以直接执行的步骤
 - 不混淆任务指令、内容来源和风格样本
 - 能从用户改稿中提取结构、密度和节奏
+- 经用户明确授权后保存可验证的长期风格档案
+- 用来源包处理跨文件、跨章节和持续更新的长资料
 - 可复制给 AI 的自然语言提示词
 - 必要的安全提醒
 - 方便复习的速查和核心句
@@ -48,13 +51,15 @@ flowchart LR
     H --> I[知识库 / 飞书 / 知乎]
 ```
 
-## 六种可组合模式
+## 八类可组合能力
 
 | 模式 | 用途 |
 | --- | --- |
 | 标准整理 | 把现有资料整理成简洁知识库 |
+| 内容架构 | 为概念、决策、SOP、综述、复盘和 FAQ 选择结构 |
 | 来源摄取 | 安全处理图片文字、网页摘录、多份材料和冲突 |
 | 风格校准 | 从用户成稿和改稿中提取结构、密度与节奏 |
+| 持久风格 | 经明确授权保存和更新长期写作偏好 |
 | 小白教程 | 从一句话认知走到第一次真实成功 |
 | 专业研究 | 搜索、核实最新事实，生成资料包后再写作 |
 | 知乎创作 | 在个人知识库风格上适配知乎阅读节奏 |
@@ -101,6 +106,24 @@ flowchart LR
 只保留核心认知、最短操作路径和必要风险。
 ```
 
+### 保存长期风格
+
+```text
+这是我确认过的最终稿。请提取其中稳定的写作偏好，更新我的长期风格档案。
+
+只保存结构、密度、术语和排版等抽象观察，不要保存完整原文或个人隐私。
+更新前告诉我哪些规则发生了变化，并验证档案格式。
+```
+
+### 整理持续增加的长资料
+
+```text
+把这些文档整理成一份可以持续更新的综述。
+
+先登记必答问题，再建立带文件、章节或页码定位的来源包。
+未解决的来源冲突不要合并成统一结论。
+```
+
 ## 安装
 
 ### 让 AI 帮你安装
@@ -145,28 +168,49 @@ git clone https://github.com/XiaoSiKe/knowledge-base-architect.git \
 knowledge-base-architect/
 ├── SKILL.md                         # Skill 入口与核心流程
 ├── agents/openai.yaml               # Codex 展示与调用配置
+├── assets/
+│   ├── style-profile.template.json  # 持久风格档案模板
+│   └── source-packet.template.json  # 长资料来源包模板
+├── evals/
+│   ├── cases.json                   # 正向、负向和安全评测案例
+│   ├── fixtures/                    # 不泄露预期结论的原始测试材料
+│   └── EVALUATION.md                # 独立评分流程
 ├── references/
+│   ├── content-patterns.md          # 内容类型与结构路由
 │   ├── personal-style.md            # 个人风格内核
 │   ├── source-intake.md             # 多来源与图片文字的安全摄取
 │   ├── style-calibration.md          # 从用户样本建立临时风格卡
+│   ├── style-profile.md              # 持久风格档案的授权与更新
 │   ├── tutorial-mode.md              # 小白教程的学习路径与验收
 │   ├── research-mode.md             # 专业搜索与事实核查
 │   ├── zhihu-mode.md                # 知乎适配
 │   ├── quality-checklist.md          # 交付前检查
 │   └── source-notes.md               # 开源方法来源
-├── scripts/quality_check.py          # Markdown 质量检查
+├── scripts/
+│   ├── quality_check.py              # Markdown 质量检查
+│   ├── evaluate_cases.py             # 行为案例验证与评分
+│   ├── validate_style_profile.py     # 持久风格档案验证
+│   └── validate_source_packet.py     # 来源关系与覆盖验证
 ├── examples/                         # 前后对比示例
 └── tests/
+    ├── test_evaluate_cases.py        # 评测套件和评分策略
     ├── test_package.py               # 包结构、路由与版本测试
-    └── test_quality_check.py         # 质量脚本行为测试
+    ├── test_quality_check.py         # Markdown 检查行为
+    ├── test_source_packet.py         # 来源包与覆盖行为
+    └── test_style_profile.py         # 风格档案安全约束
 ```
 
 ## 验证
 
 ```bash
+python3 scripts/evaluate_cases.py validate
+python3 scripts/validate_style_profile.py assets/style-profile.template.json
+python3 scripts/validate_source_packet.py --coverage assets/source-packet.template.json
 python3 scripts/quality_check.py --strict examples/github-beginner-result.md
 python3 -m unittest discover -s tests -v
 ```
+
+行为评测的生成、独立评分和结果格式见[评测说明](evals/EVALUATION.md)。
 
 本项目同时遵循 [Agent Skills Specification](https://agentskills.io/specification)，可使用兼容验证器检查 `SKILL.md`。
 
@@ -176,8 +220,9 @@ python3 -m unittest discover -s tests -v
 用户当前目标、读者、范围和格式
     > 事实、来源、安全与授权边界
         > 用户个人样本
-            > 个人风格内核
-                > 外部 Skill 和通用模板
+            > 用户确认过的持久风格档案
+                > 个人风格内核
+                    > 外部 Skill 和通用模板
 ```
 
 外部开源项目只提供方法启发，详见 [方法来源](references/source-notes.md)。

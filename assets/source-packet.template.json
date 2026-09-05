@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "packet_id": "example-source-packet",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "读者完成这份内容后应该理解或完成什么？",
+      "required": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "s1",
+      "type": "document",
+      "title": "示例资料",
+      "location": "document.md",
+      "captured_at": "2026-01-01"
+    }
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "source_id": "s1",
+      "locator": "第一节",
+      "kind": "fact",
+      "status": "clear",
+      "summary": "示例资料明确说明了目标读者和预期结果。",
+      "question_ids": [
+        "q1"
+      ],
+      "decision": "use"
+    }
+  ],
+  "conflicts": []
+}

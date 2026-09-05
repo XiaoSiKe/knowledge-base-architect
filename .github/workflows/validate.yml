@@ -23,8 +23,14 @@ jobs:
       - name: Compile scripts
         run: python3 -m compileall -q scripts tests
 
+      - name: Validate behavioral cases and structured artifacts
+        run: |
+          python3 scripts/evaluate_cases.py validate
+          python3 scripts/validate_style_profile.py assets/style-profile.template.json
+          python3 scripts/validate_source_packet.py --coverage assets/source-packet.template.json
+
       - name: Run package tests
         run: python3 -m unittest discover -s tests -v
 
       - name: Check Markdown quality
-        run: python3 scripts/quality_check.py --strict examples/*.md README.md SKILL.md references/*.md
+        run: python3 scripts/quality_check.py --strict examples/*.md evals/*.md README.md SKILL.md references/*.md

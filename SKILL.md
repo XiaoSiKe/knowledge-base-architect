@@ -1,9 +1,9 @@
 ---
 name: knowledge-base-architect
-description: 将原始资料、AI 长文、网页摘录、图片或 OCR 文字、零散笔记，重建为符合用户个人风格的简洁中文知识库内容。适用于需要内容取舍和结构重建的知识库整理、教程或科普重构、风格校准、飞书或 Markdown 排版，以及写知乎前先研究再成文；不用于仅原样摘录、单纯润色或翻译、只做网络检索的任务。
+description: 将原始资料、AI 长文、网页摘录、图片或 OCR 文字、零散笔记，重建为符合用户个人风格的简洁中文知识库内容。适用于需要内容取舍和结构重建的知识库整理、教程或科普重构、概念笔记、对比决策、SOP 或综述编排、风格校准或经授权保存长期写作偏好、长资料来源追踪、飞书或 Markdown 排版，以及写知乎前先研究再成文；不用于仅原样摘录、单纯润色或翻译、只做网络检索的任务。
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.4.0"
   language: "zh-CN"
 ---
 
@@ -18,8 +18,9 @@ metadata:
 1. 用户当前明确的目标、读者、范围和格式。
 2. 原始资料中的事实、证据、不确定性，以及安全和授权边界。
 3. 用户提供的个人写作样本和修改意见。
-4. [个人风格内核](references/personal-style.md)。
-5. 外部 Skill、模板和通用写作方法。
+4. 用户明确确认过的持久风格档案。
+5. [个人风格内核](references/personal-style.md)。
+6. 外部 Skill、模板和通用写作方法。
 
 用户样本永远高于通用模板，但不能覆盖事实、隐去关键风险或把推断写成确定结论。不要为了“更专业”把文章改成研究报告、企业文案或百科全书。
 
@@ -30,8 +31,9 @@ metadata:
 | 模式 | 适用情况 | 按需读取 |
 | --- | --- | --- |
 | 标准整理 | 用户已经给出资料，想整理成知识库 | [个人风格内核](references/personal-style.md) |
+| 内容架构 | 目标是概念笔记、对比决策、SOP、综述、复盘或 FAQ | [内容类型](references/content-patterns.md) |
 | 来源摄取 | 输入包含图片文字、多份材料、网页摘录或相互冲突的内容 | [来源摄取](references/source-intake.md) |
-| 风格校准 | 用户同时提供自己的成稿、改稿或明确的表达偏好 | [风格校准](references/style-calibration.md) |
+| 风格校准 | 用户同时提供自己的成稿、改稿或明确的表达偏好 | [风格校准](references/style-calibration.md)；要求长期保存时再读[持久风格档案](references/style-profile.md) |
 | 小白教程 | 读者需要从不了解到完成第一次操作 | [教程模式](references/tutorial-mode.md) |
 | 专业研究 | 用户要求搜索、核实、补充最新事实或多方观点 | [研究模式](references/research-mode.md) |
 | 知乎创作 | 最终内容用于知乎回答或文章 | [知乎模式](references/zhihu-mode.md)；需要新资料时再读研究模式 |
@@ -42,7 +44,7 @@ metadata:
 
 ### 1. 建立任务契约
 
-确定五件事：主题、目标读者、使用场景、读完后要能完成什么、内容深度。信息足够时直接判断；只有缺失内容会实质改变成稿时才追问。
+确定六件事：主题、目标读者、使用场景、内容类型、读完后要能完成什么、内容深度。信息足够时直接判断；只有缺失内容会实质改变成稿时才追问。
 
 内容深度默认使用“标准”：
 
@@ -62,7 +64,7 @@ metadata:
 - **解释补全**：可以补充稳定、通用且有助理解的背景；不确定或时效性内容不得凭记忆补写。
 - **研究增强**：先核实外部事实，再写正文。
 
-输入复杂时，按[来源摄取](references/source-intake.md)建立内部来源清单。
+输入复杂时，按[来源摄取](references/source-intake.md)建立内部来源清单。材料跨多个文件、章节或处理轮次时，升级为可验证的来源包。
 
 ### 3. 建立知识地图
 
@@ -84,7 +86,7 @@ metadata:
 → 实战操作 → AI 降低门槛 → 安全提醒 → 速查与记忆
 ```
 
-这是默认思路，不是固定目录。主题不适合时应调整，不要硬凑章节。
+这是教程和科普的默认思路，不是通用固定目录。其他交付物按[内容类型](references/content-patterns.md)选择结构，不要硬凑章节。
 
 小白教程优先设计一条可以完成的主路径，而不是罗列所有功能。比较、复盘、观点或 SOP 应使用各自更自然的结构。
 
@@ -99,6 +101,8 @@ metadata:
 - 可以交给 AI 完成的复杂操作，优先给出自然语言提示词。
 
 用户提供了成稿或改稿时，先按[风格校准](references/style-calibration.md)建立本次任务的临时风格卡，不要只模仿几个口头词。
+
+用户明确要求“记住、保存、更新以后都使用”的风格偏好时，再按[持久风格档案](references/style-profile.md)创建或更新档案。没有明确持久化意图时，不写入长期配置。
 
 ### 6. 压缩与校正
 
@@ -162,8 +166,10 @@ python3 scripts/quality_check.py path/to/document.md
 ## 参考资料路由
 
 - 所有任务先读：[个人风格内核](references/personal-style.md)
+- 概念笔记、对比决策、SOP、综述、复盘或 FAQ：[内容类型](references/content-patterns.md)
 - 图片、网页摘录、多来源或来源冲突：[来源摄取](references/source-intake.md)
 - 用户提供成稿、改稿或表达偏好：[风格校准](references/style-calibration.md)
+- 用户明确要求长期记住或更新写作偏好：[持久风格档案](references/style-profile.md)
 - 面向小白的科普、教程或操作指南：[教程模式](references/tutorial-mode.md)
 - 需要搜索、事实核查或多来源材料时读：[研究模式](references/research-mode.md)
 - 写知乎回答或文章时读：[知乎模式](references/zhihu-mode.md)
